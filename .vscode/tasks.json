@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "check",
+      "problemMatcher": ["$tsc"],
+      "label": "check",
+      "detail": "astro check && svelte-check"
+    },
+    {
+      "type": "npm",
+      "script": "lint",
+      "problemMatcher": ["$tsc"],
+      "label": "lint",
+      "detail": "pnpm run:prettier --check . && eslint ."
+    },
+    {
+      "type": "npm",
+      "script": "format",
+      "problemMatcher": ["$tsc"],
+      "label": "format",
+      "detail": "pnpm run:prettier --write ."
+    },
+    {
+      "type": "npm",
+      "script": "run:update",
+      "problemMatcher": ["$tsc"],
+      "label": "update",
+      "detail": "pnpm up"
+    },
+    {
+      "type": "npm",
+      "script": "package",
+      "problemMatcher": ["$tsc"],
+      "label": "package",
+      "detail": "svelte-package && publint"
+    },
+    {
+      "type": "npm",
+      "script": "run:publish",
+      "problemMatcher": ["$tsc"],
+      "label": "publish",
+      "detail": "pnpm publish"
+    }
+  ]
+}
