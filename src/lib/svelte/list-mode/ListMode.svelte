@@ -5,7 +5,7 @@
 
   type Props = {
     mode: 'app' | 'list' | 'map';
-    length: number;
+    length?: number;
     class?: ClassValue;
     classButton?: ClassValue;
     app?: boolean;
@@ -14,6 +14,7 @@
     icons?: Record<'app' | 'list' | 'map', string>;
     size?: number | string;
   };
+
   let {
     mode = $bindable(),
     length,
@@ -39,6 +40,7 @@
   let innerWidth = $state(0);
 
   const buttonClass = [
+    'first:ml-auto',
     'rounded-sm p-1.5',
     'disabled:text-cyan-600 dark:disabled:text-cyan-700',
     'oversee:bg-gray-300 dark:oversee:bg-gray-700',
@@ -49,15 +51,18 @@
     if (mode === 'map' && innerWidth < 640) mode = 'app';
   });
   $effect(() => {
-    if (mode === 'app') document?.lazyload.update();
-    if (mode === 'map') setTimeout(() => toObj('#ymap', { offset: -96, duration: 2100 }), 700);
+    if (mode === 'app') document?.lazyload?.update();
+    if (mode === 'map')
+      setTimeout(() => toObj('[id|="ymap"]', { offset: -96, duration: 2100 }), 700);
   });
 </script>
 
 <svelte:window bind:innerWidth />
 
 <div class={twMerge('overflow-hidden', 'flex items-center gap-4', className)}>
-  <span class="mr-auto p-1.5 pl-0">[ <small>{length}</small> ]</span>
+  {#if length}
+    <span class="mr-auto p-1.5">[ <small>{length}</small> ]</span>
+  {/if}
   {#if app}
     <button
       onclick={() => (mode = 'app')}

@@ -2,6 +2,8 @@ export type { IconAttributes } from './icon/index.d.ts';
 export type { LightboxAttributes } from './lightbox/index.d.ts';
 export type { SignAttributes } from './sign/index.d.ts';
 
+export { default as BindModeList } from './bind/BindModeList.svelte';
+
 export { default as Img } from './img/Img.svelte';
 export { default as Icon } from './icon/Icon.svelte';
 export { default as Figure } from './figure/Figure.svelte';
@@ -20,4 +22,4 @@ export { default as LightboxList } from './lightbox/LightboxList.svelte';
 export { default as LightboxModal } from './lightbox/LightboxModal.svelte';
 export { default as LightboxThumbnail } from './lightbox/LightboxThumbnail.svelte';
 
-export { default as YandexMetrikaHit } from './yandex/YandexMetrikaHit.svelte';
+// export { default as YandexMetrikaHit } from './yandex/YandexMetrikaHit.svelte';

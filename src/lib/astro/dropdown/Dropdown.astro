@@ -26,14 +26,14 @@ const Component = href ? Link : Button;
   class={twMerge('relative', 'ready:transition-transform ready:duration-200', custom.frame)}
   {...props}>
   <Component
-    id={`app-dropdown-toggle${uuid}`}
+    id={`app-dropdown-toggle-${uuid}`}
     class={twMerge('group', 'flex gap-x-1', 'page:enabled', className)}
     {href}
     {role}
     type={href ? undefined : 'button'}
     {...propsToggle}
     aria-expanded='false'
-    aria-controls={`app-dropdown-appear${uuid}`}>
+    aria-controls={`app-dropdown-appear-${uuid}`}>
     <span
       slot='after'
       class:list={[
@@ -46,20 +46,20 @@ const Component = href ? Link : Button;
   </Component>
 
   <div
-    id={`app-dropdown-appear${uuid}`}
+    id={`app-dropdown-appear-${uuid}`}
     class={twMerge(
-      'bp:absolute bp:top-full static',
+      'static bp:absolute bp:top-full',
       'w-max min-w-full overflow-hidden',
       'flex flex-col',
       'inert:disabled inert:opacity-0',
-      'inert:my-0 inert:max-h-0 inert:py-0 inert:text-[0] inert:leading-[0]',
+      'inert:my-0 inert:max-h-0 inert:py-0 inert:leading-[0] inert:text-[0]',
       'max-bp:inert:max-w-0',
-      'bp:origin-top origin-top-left',
-      'motion-safe:ready:transition-all duration-200',
+      'origin-top-left bp:origin-top',
+      'duration-200 motion-safe:ready:transition-all',
       custom.drop
     )}
     inert
-    aria-owns={`app-dropdown-toggle${uuid}`}>
+    aria-owns={`app-dropdown-toggle-${uuid}`}>
     <slot />
   </div>
 </div>

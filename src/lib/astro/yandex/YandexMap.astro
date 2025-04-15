@@ -15,7 +15,7 @@ type Props = Omit<HTMLAttributes<'div'>, 'class' | 'lang'> & {
 };
 
 const {
-  id = `ymap${uuid()}`,
+  id = `ymap-${uuid()}`,
   class: className,
   geo,
   strict,
