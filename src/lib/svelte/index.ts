@@ -22,4 +22,5 @@ export { default as LightboxList } from './lightbox/LightboxList.svelte';
 export { default as LightboxModal } from './lightbox/LightboxModal.svelte';
 export { default as LightboxThumbnail } from './lightbox/LightboxThumbnail.svelte';
 
+export { default as YandexMap } from './yandex/YandexMap.svelte';
 // export { default as YandexMetrikaHit } from './yandex/YandexMetrikaHit.svelte';

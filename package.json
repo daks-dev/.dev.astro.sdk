@@ -2,7 +2,6 @@
   "name": "@daks.dev/astro.sdk",
   "version": "0.2.0",
   "description": "DAKS.DEV Astro software development kit",
-  "type": "module",
   "scripts": {
     "info": "astro info",
     "check": "astro check && svelte-check",
@@ -32,6 +31,7 @@
     "@vitest/ui": "^3.1.1",
     "astro": "^5.7.0",
     "dayjs": "^1.11.13",
+    "esm-env": "^1.2.2",
     "mini-svg-data-uri": "^1.4.4",
     "nanostores": "^1.0.1",
     "publint": "^0.3.12",
@@ -89,7 +89,8 @@
     "./icons/*": "./dist/assets/icons/*",
     "./images/*": "./dist/assets/images/*"
   },
-  "types": "dist/index.d.ts",
+  "types": "./dist/index.d.ts",
+  "type": "module",
   "files": [
     "dist",
     "!dist/**/*.test.*",

@@ -5,10 +5,10 @@ import { uuid } from '../../utils/index.js';
 import type { YandexMapGeo } from './index.d.ts';
 
 type Props = Omit<HTMLAttributes<'div'>, 'class' | 'lang'> & {
-  id?: string;
-  class?: ClassValue;
   geo: YandexMapGeo;
   strict?: true;
+  id?: string;
+  class?: ClassValue;
   apikey?: string;
   lang?: string;
   type?: string;
@@ -26,14 +26,11 @@ const {
 } = Astro.props;
 
 if (!strict)
-  geo.options = {
-    ...geo.options,
-    ...{
-      // avoidFractionalZoom: false,
-      // autoFitToViewport: 'always',
-      suppressMapOpenBlock: true
-    }
-  };
+  geo.options = Object.assign({}, geo.options, {
+    // avoidFractionalZoom: false,
+    // autoFitToViewport: 'always',
+    suppressMapOpenBlock: true
+  });
 ---
 
 <app-yandex-map

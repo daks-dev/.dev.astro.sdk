@@ -1,10 +1,6 @@
 import './types.d.ts';
 
-// app
 export type { AppConfig } from './app/index.d.ts';
-
-// assets
-export { default as placeholder } from './assets/images/placeholder.js';
 
 // tailwind
 export { default as twExtendConfig, twMerge, twJoin } from './tailwind/tailwind-merge.js';

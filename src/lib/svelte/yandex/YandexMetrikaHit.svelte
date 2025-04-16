@@ -5,6 +5,7 @@
 </script>
 
 <script lang="ts">
+  // @ts-nocheck
   import { browser } from '$app/environment';
   import { onMount } from 'svelte';
   import { page, navigating } from '$app/state';
