@@ -1,7 +1,7 @@
 <script
   lang="ts"
   module>
-  import type { YandexMapGeo, YandexMapInstance, Ymaps } from './index.d.ts';
+  import type { YandexMapGeo, YandexMapInstance, Ymaps } from '../../index.d.ts';
 
   declare const ymaps: Ymaps;
 </script>
@@ -15,22 +15,24 @@
 
   type Props = Omit<SvelteHTMLElements['div'], 'class' | 'role' | 'tabindex'> & {
     geo: YandexMapGeo;
+    apikey: string;
     strict?: true;
     tag?: 'div' | 'aside';
     id?: string;
     class: ClassValue;
-    apikey?: string;
     lang?: string;
+    load?: string;
   };
 
   const {
     geo,
+    apikey,
     strict,
     tag = 'div',
     id = `ymap-${uuid()}`,
     class: className,
-    apikey,
     lang = 'ru_RU',
+    load = 'Map,Placemark,control.ZoomControl,control.FullscreenControl,geoObject.addon.balloon',
     ...rest
   }: Props = $props();
 
@@ -42,9 +44,9 @@
     });
 
   const params = new URLSearchParams({
+    apikey: apikey,
     lang,
-    ...(apikey ? { apikey } : {}),
-    load: 'Map,Placemark,control.ZoomControl,control.FullscreenControl,geoObject.addon.balloon'
+    load
     // mode: 'debug'
   }).toString();
 
@@ -72,6 +74,7 @@
       }
     }, 75);
   }
+
   const handler = (ev: Event) => {
     if (ev.cancelable) ev.preventDefault();
     ev.stopPropagation();
@@ -80,17 +83,19 @@
 
   onMount(() => {
     if (BROWSER) {
-      if (upload()) mount();
+      //if (upload()) mount();
+      //else {
+      const src = `https://api-maps.yandex.ru/2.1/?${params}`;
+      if (document.head.querySelector(`script[src="${src}"]`)) mount();
       else {
-        const src = `https://api-maps.yandex.ru/2.1/?${params}`;
-        if (!document.head.querySelector(`script[src="${src}"]`)) {
-          const el = document.createElement('script');
-          el.src = src;
-          el.async = true;
-          document.head.appendChild(el);
-          el.addEventListener('load', mount, { once: true });
-        } else mount();
+        if (typeof ymaps !== 'undefined') delete ymaps.ready;
+        const el = document.createElement('script');
+        el.src = src;
+        el.async = true;
+        document.head.appendChild(el);
+        el.addEventListener('load', mount, { once: true });
       }
+      //}
       return () => clearInterval(interval);
     }
   });
@@ -103,7 +108,7 @@
   ontouchstart={handler}
   ontouchend={handler}
   {id}
-  class={twMerge(className)}
+  class={twMerge('relative z-0 overflow-hidden', className)}
   role="button"
   tabindex="-1"
   {...rest} />

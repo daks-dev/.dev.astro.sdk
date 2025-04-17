@@ -1,32 +1,3 @@
-import type { HTMLAttributes } from 'astro/types';
-
-export type NavLink = Omit<HTMLAttributes<'a'>, 'class'> & {
-  class?: ClassValue;
-  label?: string;
-  icon?: string;
-  pointer?: boolean;
-  prefetch?: boolean;
-};
-
-export type NavItem = NavLink & {
-  base?: string;
-  disallow?: boolean;
-  items?: NavItem[];
-};
-
-export interface NavSite {
-  navbar: {
-    items: NavItem[];
-  };
-  draver?: {
-    items: NavItem[];
-  };
-  footer?: {
-    items: NavItem[];
-  };
-  allow?: string[];
-}
-
 export { default as Img } from './img/Img.astro';
 export { default as Icon } from './icon/Icon.astro';
 export { default as Link } from './link/Link.astro';

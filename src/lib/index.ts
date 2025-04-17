@@ -1,5 +1,33 @@
 import './types.d.ts';
 
+import type { HTMLAttributes } from 'astro/types';
+export type NavLink = Omit<HTMLAttributes<'a'>, 'class'> & {
+  class?: ClassValue;
+  label?: string;
+  icon?: string;
+  pointer?: boolean;
+  prefetch?: boolean;
+};
+export type NavItem = NavLink & {
+  base?: string;
+  disallow?: boolean;
+  items?: NavItem[];
+};
+
+export type Ym = (...x: unknown[]) => void;
+export type Ymaps = {
+  ready?: (...x: unknown[]) => unknown;
+  Map: new (...x: unknown[]) => YandexMapInstance;
+  Placemark: new (...x: unknown[]) => unknown;
+} & Record<string, (...x: unknown[]) => unknown>;
+export type YandexMapInstance = Record<string, (...x: unknown[]) => unknown> &
+  Record<string, Record<string, (...x: unknown[]) => Record<string, (...x: unknown[]) => unknown>>>;
+export type YandexMapGeo = {
+  state: Record<string, unknown>;
+  options: Record<string, unknown>;
+  locations: Record<string, unknown>[];
+};
+
 export type { AppConfig } from './app/index.d.ts';
 
 // tailwind

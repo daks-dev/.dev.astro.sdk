@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from 'astro/types';
 import { twMerge } from '../../tailwind/tailwind-merge.js';
 import { uuid } from '../../utils/index.js';
-import type { YandexMapGeo } from './index.d.ts';
+import type { YandexMapGeo } from '../../index.d.ts';
 
 type Props = Omit<HTMLAttributes<'div'>, 'class' | 'lang'> & {
   geo: YandexMapGeo;
@@ -11,17 +11,17 @@ type Props = Omit<HTMLAttributes<'div'>, 'class' | 'lang'> & {
   class?: ClassValue;
   apikey?: string;
   lang?: string;
-  type?: string;
+  load?: string;
 };
 
 const {
-  id = `ymap-${uuid()}`,
-  class: className,
   geo,
   strict,
+  id = `ymap-${uuid()}`,
+  class: className,
   apikey,
   lang = 'ru_RU',
-  type,
+  load = 'Map,Placemark,control.ZoomControl,control.FullscreenControl,geoObject.addon.balloon',
   ...props
 } = Astro.props;
 
@@ -37,18 +37,18 @@ if (!strict)
   data-geo={JSON.stringify(geo)}
   data-apikey={apikey}
   data-lang={lang}
-  data-type={type}>
+  data-load={load}>
   <template>
     <div
       {id}
-      class={twMerge('relative z-0', className)}
+      class={twMerge('relative z-0 overflow-hidden', className)}
       {...props}>
     </div>
   </template>
 </app-yandex-map>
 
 <script>
-  import type { YandexMapGeo, YandexMapInstance, Ymaps } from './index.d.ts';
+  import type { YandexMapGeo, YandexMapInstance, Ymaps } from '../../index.d.ts';
   declare const ymaps: Ymaps;
 
   class AppYandexMap extends HTMLElement {
@@ -71,14 +71,27 @@ if (!strict)
       clearInterval(this.interval);
     }
 
-    get geo() {
-      return (this.dataset.geo ? JSON.parse(this.dataset.geo) : {}) as YandexMapGeo;
+    get geo(): YandexMapGeo {
+      return JSON.parse(this.dataset.geo ?? '{}');
     }
 
-    ready = () => {
+    get params() {
+      return new URLSearchParams({
+        ...(this.dataset.apikey ? { apikey: this.dataset.apikey } : {}),
+        ...(this.dataset.lang ? { lang: this.dataset.lang } : {}),
+        ...(this.dataset.load ? { load: this.dataset.load } : {})
+        // mode: 'debug'
+      }).toString();
+    }
+
+    upload = (): boolean => {
+      return Boolean(typeof ymaps !== 'undefined' && ymaps?.Map && ymaps?.Placemark);
+    };
+
+    mount = (): void => {
       this.interval = setInterval(() => {
-        if (typeof ymaps !== 'undefined' && ymaps.ready) {
-          ymaps.ready(() => {
+        if (this.upload()) {
+          ymaps.ready?.(() => {
             this.map = new ymaps.Map(this.container.id, this.geo.state, this.geo.options);
             this.geo.locations?.forEach((location) => {
               this.map.geoObjects.add(
@@ -92,23 +105,19 @@ if (!strict)
     };
 
     init = () => {
-      const params = new URLSearchParams({
-        ...(this.dataset.apikey ? { apikey: this.dataset.apikey } : {}),
-        lang: this.dataset.lang ?? 'ru_RU',
-        load: 'Map,Placemark,control.ZoomControl,control.FullscreenControl,geoObject.addon.balloon'
-        // mode: 'debug'
-      }).toString();
-      const src = `https://api-maps.yandex.ru/2.1/?${params}`;
-      if (!document.head.querySelector(`script[src="${src}"]`)) {
-        // TODO: Yandex Maps JS API api is already enabled on this page with same namespace
-        typeof ymaps !== 'undefined' && delete ymaps.ready;
+      // if (this.upload()) this.mount();
+      // else {
+      const src = `https://api-maps.yandex.ru/2.1/?${this.params}`;
+      if (document.head.querySelector(`script[src="${src}"]`)) this.mount();
+      else {
+        if (typeof ymaps !== 'undefined') delete ymaps.ready;
         const el = document.createElement('script');
         el.src = src;
         el.async = true;
-        if (this.dataset.type) el.type = this.dataset.type;
         document.head.appendChild(el);
+        el.addEventListener('load', this.mount, { once: true });
       }
-      this.ready();
+      // }
     };
   }
 

@@ -1,6 +1,6 @@
 ---
 import { twMerge } from '../../tailwind/tailwind-merge.js';
-import type { NavLink } from '../index.d.ts';
+import type { NavLink } from '../../index.d.ts';
 
 type Props = NavLink & {
   base?: string;
@@ -38,7 +38,7 @@ const current =
     {
       icon ? (
         <span
-          class={twMerge('bg-only bold', icon)}
+          class={twMerge('bold bg-only', icon)}
           set:html={label}
         />
       ) : (
