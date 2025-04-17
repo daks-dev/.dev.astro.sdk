@@ -28,8 +28,7 @@ const options = JSON.stringify({ clickmap, trackLinks, accurateTrackBounce, trac
 ></app-yandex-metrika>
 
 <script>
-  import type { Ym } from '../../index.d.ts';
-  declare const ym: Ym;
+  declare const ym: (...x: unknown[]) => void;
 
   class AppYandexMetrika extends HTMLElement {
     constructor() {

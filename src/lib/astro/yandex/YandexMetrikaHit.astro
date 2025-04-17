@@ -14,22 +14,26 @@ const href = Astro.url.href;
 ></app-yandex-metrika-hit>
 
 <script>
-  import type { Ym } from '../../index.d.ts';
-  declare const ym: Ym;
+  declare const ym: (...x: unknown[]) => void;
+
+  let referer: string | undefined;
 
   class AppYandexMetrikaHit extends HTMLElement {
-    interval!: ReturnType<typeof setInterval>;
+    interval?: ReturnType<typeof setInterval>;
 
     constructor() {
       super();
     }
 
     connectedCallback() {
-      this.init();
+      document.addEventListener('astro:before-swap', this.navi, { once: true });
+      document.addEventListener('astro:page-load', this.init, { once: true });
     }
 
     disconnectedCallback() {
       clearInterval(this.interval);
+      document.removeEventListener('astro:before-swap', this.navi);
+      document.removeEventListener('astro:page-load', this.init);
     }
 
     get counter() {
@@ -37,12 +41,17 @@ const href = Astro.url.href;
       return isNaN(counter) ? 0 : counter;
     }
 
+    navi = (ev: Event & { from?: URL }) => {
+      referer = ev.from?.href;
+    };
+
     init = () => {
       if (this.counter) {
         this.interval = setInterval(() => {
           if (typeof ym !== 'undefined') {
             ym(this.counter, 'hit', this.dataset.href, {
-              title: this.dataset.title
+              title: this.dataset.title,
+              referer
             });
             clearInterval(this.interval);
           }
