@@ -3,9 +3,9 @@
   import type { Snippet } from 'svelte';
 
   type Props = {
-    length?: number;
     class?: ClassValue;
     classButton?: ClassValue;
+    length?: number;
     icons?: Record<'app' | 'list' | 'map', string>;
     app?: Snippet<[]>;
     list?: Snippet<[]>;

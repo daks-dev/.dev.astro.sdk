@@ -2,7 +2,7 @@ export type { IconAttributes } from './icon/index.d.ts';
 export type { LightboxAttributes } from './lightbox/index.d.ts';
 export type { SignAttributes } from './sign/index.d.ts';
 
-export { default as BindModeList } from './bind/BindModeList.svelte';
+export { default as BindListMode } from './bind/BindListMode.svelte';
 
 export { default as Img } from './img/Img.svelte';
 export { default as Icon } from './icon/Icon.svelte';

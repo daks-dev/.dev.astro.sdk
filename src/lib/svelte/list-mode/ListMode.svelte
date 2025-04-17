@@ -1,6 +1,5 @@
 <script lang="ts">
   import { twMerge } from '../../tailwind/tailwind-merge.js';
-  import Icon from '../icon/Icon.svelte';
   import { toObj } from '../../utils/scroll.js';
 
   type Props = {
@@ -12,7 +11,6 @@
     list?: boolean;
     map?: boolean;
     icons?: Record<'app' | 'list' | 'map', string>;
-    size?: number | string;
   };
 
   let {
@@ -23,19 +21,17 @@
     app = false,
     list = false,
     map = false,
-    icons,
-    size = '1.5em'
+    icons
   }: Props = $props();
 
   icons = Object.assign(
     {
-      app: 'squares-four',
-      list: 'list-dashes',
-      map: 'map-trifold'
+      app: 'iconify ph--squares-four',
+      list: 'iconify ph--list-dashes',
+      map: 'iconify ph--map-trifold'
     },
     icons
   );
-  size = typeof size === 'number' ? `${size}em` : size;
 
   let innerWidth = $state(0);
 
@@ -68,10 +64,9 @@
       onclick={() => (mode = 'app')}
       class={twMerge(buttonClass, classButton)}
       type="button"
+      aria-label="список блоками"
       disabled={mode === 'app' || undefined}>
-      <Icon
-        icon={icons.app}
-        {size} />
+      <span class={twMerge('block size-6', icons.app)}>список блоками</span>
     </button>
   {/if}
   {#if list}
@@ -79,10 +74,9 @@
       onclick={() => (mode = 'list')}
       class={twMerge(buttonClass, classButton)}
       type="button"
+      aria-label="список строками"
       disabled={mode === 'list' || undefined}>
-      <Icon
-        icon={icons.list}
-        {size} />
+      <span class={twMerge('block size-6', icons.list)}>список строками</span>
     </button>
   {/if}
   {#if map}
@@ -90,10 +84,9 @@
       onclick={() => (mode = 'map')}
       class={twMerge(buttonClass, classButton)}
       type="button"
+      aria-label="список маркерами на карте"
       disabled={mode === 'map' || undefined}>
-      <Icon
-        icon={icons.map}
-        {size} />
+      <span class={twMerge('bg-only size-6', icons.map)}>список маркерами на карте</span>
     </button>
   {/if}
 </div>
