@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { Tween } from 'svelte/motion';
   import { linear, quadInOut } from 'svelte/easing';
   import { twMerge } from '../../tailwind/tailwind-merge.js';
@@ -163,7 +162,7 @@
 
   let wrapper: HTMLElement;
   let slider: HTMLElement;
-  onMount(() => {
+  $effect(() => {
     //carousel.addEventListener('wheel', handleWheel);
     total ||= slider.children.length;
     start();
@@ -178,7 +177,7 @@
   this={tag}
   bind:this={wrapper}
   class={twMerge(
-    'linecap-round linejoin-round vector-non-scaling-stroke',
+    'vector-non-scaling-stroke linecap-round linejoin-round',
     'transition-opacity ease-in',
     className
   )}

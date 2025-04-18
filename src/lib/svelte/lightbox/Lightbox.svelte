@@ -1,6 +1,5 @@
 <script lang="ts">
   import { twMerge } from '../../tailwind/tailwind-merge.js';
-  import { onMount } from 'svelte';
   import Overlay from './inc/Overlay.svelte';
   import Header from './inc/Header.svelte';
   import Footer from './inc/Footer.svelte';
@@ -58,7 +57,7 @@
     fullscreen = !fullscreen;
   }
 
-  onMount(() => {
+  $effect(() => {
     loader?.();
     if (!options.bodyScroll || scrollable) {
       toggleScroll = () => {

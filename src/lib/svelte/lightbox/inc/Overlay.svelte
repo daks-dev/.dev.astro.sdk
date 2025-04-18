@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount, onDestroy } from 'svelte';
   import { fade } from 'svelte/transition';
   import { twMerge } from '../../../tailwind/tailwind-merge.js';
   import { swipe, wheel } from '../../../utils/index.js';
@@ -18,27 +17,27 @@
 
   const { children, close, next, previous, custom, options, fullscreen }: Props = $props();
 
-  function handleKey(e: KeyboardEvent): void {
+  function handleKey(ev: KeyboardEvent): void {
     if (options.enableKeyboard)
-      switch (e.key) {
+      switch (ev.key) {
         case 'Escape':
-          e.preventDefault();
-          e.stopPropagation();
+          if (ev.cancelable) ev.preventDefault();
+          ev.stopPropagation();
           close();
       }
   }
 
   const handleClick = options.clickableClose
-    ? function (e: Event): void {
-        e.preventDefault();
-        e.stopPropagation();
+    ? function (ev: Event): void {
+        if (ev.cancelable) ev.preventDefault();
+        ev.stopPropagation();
         close();
       }
     : undefined;
 
-  const breakClick = (e: Event) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const breakClick = (ev: Event) => {
+    if (ev.cancelable) ev.preventDefault();
+    ev.stopPropagation();
     return false;
   };
 
@@ -57,19 +56,19 @@
       }
     : undefined;
 
+  const touch = () =>
+    window.matchMedia('(pointer: coarse)').matches ||
+    navigator.maxTouchPoints > 0 ||
+    'ontouchstart' in document.documentElement;
+
   let node: HTMLElement;
   let anchor: HTMLElement;
-  let touch = $state(false);
-  onMount(() => {
+  $effect(() => {
     anchor = document.createElement('div');
     document.body.appendChild(anchor);
     anchor.appendChild(node);
-    touch =
-      window.matchMedia('(pointer: coarse)').matches ||
-      navigator.maxTouchPoints > 0 ||
-      'ontouchstart' in document.documentElement;
+    return () => document.body.removeChild(anchor);
   });
-  onDestroy(() => typeof document !== 'undefined' && document.body.removeChild(anchor));
 </script>
 
 <svelte:window onkeydown={handleKey} />
@@ -83,7 +82,7 @@
   onclick={handleClick}
   onkeydown={null}
   class={twMerge(
-    'fixed left-0 top-0 z-[999] h-screen max-h-screen w-full max-w-full overflow-hidden',
+    'fixed top-0 left-0 z-[999] h-screen max-h-screen w-full max-w-full overflow-hidden',
     'flex items-center justify-center',
     'not-prose text-base leading-none',
     'bg-black/90',
@@ -104,9 +103,9 @@
   </div>
   <div
     class="
-      absolute left-4 top-4
+      absolute top-4 left-4
       flex items-center gap-2 text-gray-500">
-    {#if touch}
+    {#if touch()}
       <svg
         width="20px"
         height="20px"

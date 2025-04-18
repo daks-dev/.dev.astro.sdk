@@ -7,8 +7,6 @@
 </script>
 
 <script lang="ts">
-  import { BROWSER } from 'esm-env';
-  import { onMount } from 'svelte';
   import { twMerge } from '../../tailwind/tailwind-merge.js';
   import { uuid } from '../../utils/index.js';
   import type { SvelteHTMLElements } from 'svelte/elements';
@@ -81,23 +79,18 @@
     return false;
   };
 
-  onMount(() => {
-    if (BROWSER) {
-      //if (upload()) mount();
-      //else {
-      const src = `https://api-maps.yandex.ru/2.1/?${params}`;
-      if (document.head.querySelector(`script[src="${src}"]`)) mount();
-      else {
-        if (typeof ymaps !== 'undefined') delete ymaps.ready;
-        const el = document.createElement('script');
-        el.src = src;
-        el.async = true;
-        document.head.appendChild(el);
-        el.addEventListener('load', mount, { once: true });
-      }
-      //}
-      return () => clearInterval(interval);
+  $effect(() => {
+    const src = `https://api-maps.yandex.ru/2.1/?${params}`;
+    if (document.head.querySelector(`script[src="${src}"]`)) mount();
+    else {
+      if (typeof ymaps !== 'undefined') delete ymaps.ready;
+      const el = document.createElement('script');
+      el.src = src;
+      el.async = true;
+      document.head.appendChild(el);
+      el.addEventListener('load', mount, { once: true });
     }
+    return () => clearInterval(interval);
   });
 </script>
 

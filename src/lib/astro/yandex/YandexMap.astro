@@ -54,7 +54,7 @@ if (!strict)
   class AppYandexMap extends HTMLElement {
     map!: YandexMapInstance;
     container: HTMLDivElement;
-    interval?: ReturnType<typeof setTimeout>;
+    interval?: ReturnType<typeof setInterval>;
 
     constructor() {
       super();

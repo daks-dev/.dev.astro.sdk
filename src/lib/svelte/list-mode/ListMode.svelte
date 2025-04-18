@@ -49,7 +49,7 @@
   $effect(() => {
     if (mode === 'app') document?.lazyload?.update();
     if (mode === 'map')
-      setTimeout(() => toObj('[id|="ymap"]', { offset: -96, duration: 2100 }), 700);
+      setTimeout(() => toObj('[id|="ymap"]', { offset: -96, duration: 2100 }), 500);
   });
 </script>
 
@@ -79,7 +79,7 @@
       <span class={twMerge('block size-6', icons.list)}>список строками</span>
     </button>
   {/if}
-  {#if map}
+  {#if map && innerWidth >= 640}
     <button
       onclick={() => (mode = 'map')}
       class={twMerge(buttonClass, classButton)}

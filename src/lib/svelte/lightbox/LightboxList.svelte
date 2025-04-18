@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, setContext } from 'svelte';
+  import { setContext } from 'svelte';
   import { twMerge } from '../../tailwind/tailwind-merge.js';
   import Overlay from './inc/Overlay.svelte';
   import Header from './inc/Header.svelte';
@@ -67,10 +67,6 @@
   let activeItemTitle = $derived(items[activeItem]?.title || title);
   let activeItemDescription = $derived(items[activeItem]?.description || description);
 
-  $effect(() => {
-    if (!visible) items = [];
-  });
-
   let toggleScroll: () => void;
 
   function toggle(): void {
@@ -117,8 +113,9 @@
     }
   }
 
-  onMount(() => {
-    loader?.call(null);
+  $effect(() => {
+    if (!visible) items = [];
+    loader?.();
     if (!options.bodyScroll || scrollable) {
       toggleScroll = function () {
         if (window.scrollbars.visible)
