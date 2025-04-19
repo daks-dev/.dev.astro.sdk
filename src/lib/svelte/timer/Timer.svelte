@@ -4,9 +4,9 @@
   import { twMerge } from '../../tailwind/tailwind-merge.js';
   import type { HTMLTimeAttributes } from 'svelte/elements';
 
-  type Props = Omit<HTMLTimeAttributes, 'class'> & {
+  export interface Props extends Omit<HTMLTimeAttributes, 'class'> {
     class?: ClassValue;
-  };
+  }
 
   const {
     class: className,
@@ -22,7 +22,7 @@
     const s = Math.floor(x % 60);
     return (
       (d ? `${d.toString()} - ` : '') +
-      (h ? `${h.toString().padStart(2, '0')}:` : '') +
+      (h || d ? `${h.toString().padStart(2, '0')}:` : '') +
       `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`
     );
   };

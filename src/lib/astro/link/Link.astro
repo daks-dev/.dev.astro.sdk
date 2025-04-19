@@ -1,21 +1,24 @@
 ---
 import { twMerge } from '../../tailwind/tailwind-merge.js';
-import type { NavLink } from '../../index.d.ts';
+import type { NavItem } from '../../index.d.ts';
 
-type Props = NavLink & {
-  base?: string;
-};
+// export interface Props extends Omit<NavItem, 'items'> {}
+export interface Props extends NavItem {}
 
 const {
   class: className,
   href: __href,
-  label,
+  inert,
+  'aria-current': ariaCurrent,
+  'aria-label': ariaLabel,
+  label = ariaLabel,
   icon,
   pointer,
-  prefetch,
   base = '',
   ...props
 } = Astro.props;
+
+delete props.items;
 
 const href = `${base}${__href}`.replace('//', '/');
 const current =
@@ -27,11 +30,11 @@ const current =
 ---
 
 <a
-  class={twMerge(!pointer && 'page:disabled', className)}
+  class={twMerge(className)}
   {href}
+  inert={(inert ?? (!pointer && current === 'page')) ? true : undefined}
   aria-label={Astro.slots.has('default') || icon ? label : undefined}
-  aria-current={current}
-  data-astro-prefetch={prefetch}
+  aria-current={ariaCurrent ?? current}
   {...props}>
   <slot name='before' />
   <slot>

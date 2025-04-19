@@ -1,18 +1,14 @@
 import './types.d.ts';
 
 import type { HTMLAttributes } from 'astro/types';
-export type NavLink = Omit<HTMLAttributes<'a'>, 'class'> & {
+export interface NavItem extends Omit<HTMLAttributes<'a'>, 'class'> {
   class?: ClassValue;
   label?: string;
-  icon?: string;
+  icon?: ClassValue;
   pointer?: boolean;
-  prefetch?: boolean;
-};
-export type NavItem = NavLink & {
   base?: string;
-  disallow?: boolean;
   items?: NavItem[];
-};
+}
 
 export type Ym = (...x: unknown[]) => void;
 export type Ymaps = {

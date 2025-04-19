@@ -1,6 +1,5 @@
-export const uuid = () =>
-  '_' +
-  Math.floor((1 + Math.random()) * 0x10000000)
+export const uuid = (length = 8) =>
+  Math.floor((1 + Math.random()) * Math.pow(10, length) * 0x1)
     .toString(16)
     .substring(1);
 

@@ -4,11 +4,17 @@ import type { HTMLAttributes } from 'astro/types';
 
 type Props = Omit<HTMLAttributes<'button'>, 'class'> & {
   class?: ClassValue;
-  icon?: ClassValue;
   label?: string;
+  icon?: ClassValue;
 };
 
-const { class: className, icon, label, ...props } = Astro.props;
+const {
+  class: className,
+  'aria-label': ariaLabel,
+  label = ariaLabel,
+  icon,
+  ...props
+} = Astro.props;
 ---
 
 <button
@@ -20,7 +26,7 @@ const { class: className, icon, label, ...props } = Astro.props;
     {
       icon ? (
         <span
-          class={twMerge('bg-only bold', icon)}
+          class={twMerge('bold bg-only', icon)}
           set:html={label}
         />
       ) : (
