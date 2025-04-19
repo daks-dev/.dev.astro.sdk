@@ -1,5 +1,5 @@
-export const uuid = (length = 8) =>
-  Math.floor((1 + Math.random()) * Math.pow(10, length) * 0x1)
+export const uuid = (length = 5) =>
+  Math.floor((1 + Math.random()) * Math.pow(16, length) * 0x1)
     .toString(16)
     .substring(1);
 

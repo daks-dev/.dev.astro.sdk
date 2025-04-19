@@ -15,7 +15,7 @@
     geo: YandexMapGeo;
     apikey: string;
     strict?: true;
-    tag?: 'div' | 'aside';
+    tag?: 'div' | 'aside' | 'section';
     id?: string;
     class: ClassValue;
     lang?: string;
@@ -73,12 +73,6 @@
     }, 75);
   }
 
-  const handler = (ev: Event) => {
-    if (ev.cancelable) ev.preventDefault();
-    ev.stopPropagation();
-    return false;
-  };
-
   $effect(() => {
     const src = `https://api-maps.yandex.ru/2.1/?${params}`;
     if (document.head.querySelector(`script[src="${src}"]`)) mount();
@@ -96,12 +90,6 @@
 
 <svelte:element
   this={tag}
-  onmousedown={handler}
-  onmouseup={handler}
-  ontouchstart={handler}
-  ontouchend={handler}
   {id}
   class={twMerge('relative z-0 overflow-hidden', className)}
-  role="button"
-  tabindex="-1"
   {...rest} />

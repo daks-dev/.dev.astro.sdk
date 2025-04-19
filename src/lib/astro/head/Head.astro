@@ -234,13 +234,13 @@ const {
 <script>
   import lazyLoad from '../../utils/lazyload.js';
 
+  document.addEventListener('astro:after-swap', () => {
+    setTimeout(() => document.documentElement.classList.add('swapped'), 75);
+  });
   document.addEventListener('astro:page-load', () => {
     setTimeout(() => document.documentElement.classList.add('loaded'), 75);
     if (document.lazyload) document.lazyload.update();
     else document.lazyload = lazyLoad();
-  });
-  document.addEventListener('astro:after-swap', () => {
-    setTimeout(() => document.documentElement.classList.add('swapped'), 75);
   });
 
   const node = document.getElementById('app-navbar');
