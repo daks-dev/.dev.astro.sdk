@@ -1,13 +1,15 @@
 ---
 import { twMerge } from '../../tailwind/tailwind-merge.js';
-import type { SignAttributes as Props } from './index.d.ts';
+import type { SignAttributes } from './index.d.ts';
 
-const { custom, class: className, link, small, auto, dark, light, ...props }: Props = Astro.props;
+interface Props extends SignAttributes {}
+
+const { custom, class: className, link, small, auto, dark, light, ...props } = Astro.props;
 ---
 
 <div
   class={twMerge(
-    'absolute left-1 top-1 z-10',
+    'absolute top-1 left-1 z-10',
     (auto || light || dark) && 'rounded-full p-1',
     light && 'bg-white/20',
     dark && 'bg-black/20',

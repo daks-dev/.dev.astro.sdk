@@ -2,11 +2,11 @@
 import { twMerge } from '../../tailwind/tailwind-merge.js';
 import type { HTMLAttributes } from 'astro/types';
 
-type Props = Omit<HTMLAttributes<'button'>, 'class'> & {
+interface Props extends Omit<HTMLAttributes<'button'>, 'class'> {
   class?: ClassValue;
   label?: string;
   icon?: ClassValue;
-};
+}
 
 const {
   class: className,

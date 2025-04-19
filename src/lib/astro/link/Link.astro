@@ -2,8 +2,8 @@
 import { twMerge } from '../../tailwind/tailwind-merge.js';
 import type { NavItem } from '../../index.d.ts';
 
-// export interface Props extends Omit<NavItem, 'items'> {}
-export interface Props extends NavItem {}
+// interface Props extends Omit<NavItem, 'items'> {}
+interface Props extends NavItem {}
 
 const {
   class: className,

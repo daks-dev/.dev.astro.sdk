@@ -4,9 +4,9 @@
   import { twMerge } from '../../tailwind/tailwind-merge.js';
   import type { HTMLTimeAttributes } from 'svelte/elements';
 
-  export interface Props extends Omit<HTMLTimeAttributes, 'class'> {
+  type Props = Omit<HTMLTimeAttributes, 'class'> & {
     class?: ClassValue;
-  }
+  };
 
   const {
     class: className,

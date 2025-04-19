@@ -4,7 +4,7 @@ import { twMerge } from '../../tailwind/tailwind-merge.js';
 import { uuid } from '../../utils/index.js';
 import type { YandexMapGeo } from '../../index.d.ts';
 
-type Props = Omit<HTMLAttributes<'div'>, 'class' | 'lang'> & {
+interface Props extends Omit<HTMLAttributes<'div'>, 'class' | 'lang'> {
   geo: YandexMapGeo;
   strict?: true;
   id?: string;
@@ -12,7 +12,7 @@ type Props = Omit<HTMLAttributes<'div'>, 'class' | 'lang'> & {
   apikey?: string;
   lang?: string;
   load?: string;
-};
+}
 
 const {
   geo,

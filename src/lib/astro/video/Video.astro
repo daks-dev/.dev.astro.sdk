@@ -2,13 +2,13 @@
 import { twMerge } from '../../tailwind/tailwind-merge.js';
 import type { HTMLAttributes } from 'astro/types';
 
-type Props = Omit<HTMLAttributes<'video'>, 'class'> & {
+interface Props extends Omit<HTMLAttributes<'video'>, 'class'> {
   class?: ClassValue;
   sources?: HTMLAttributes<'source'>[];
   traks?: HTMLAttributes<'track'>[];
-};
+}
 
-const { class: className, sources = [], traks = [], ...props }: Props = Astro.props;
+const { class: className, sources = [], traks = [], ...props } = Astro.props;
 ---
 
 <video

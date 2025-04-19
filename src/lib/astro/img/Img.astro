@@ -1,6 +1,8 @@
 ---
 import { twMerge } from '../../tailwind/tailwind-merge.js';
-import type { ImgAttriibutes as Props } from './index.d.ts';
+import type { ImgAttriibutes } from './index.d.ts';
+
+interface Props extends ImgAttriibutes {}
 
 import placeholder from '../../assets/images/placeholder';
 

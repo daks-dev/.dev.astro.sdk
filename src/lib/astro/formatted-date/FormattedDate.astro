@@ -6,7 +6,7 @@ dayjs.extend(custom);
 import { twMerge } from '../../tailwind/tailwind-merge';
 import type { HTMLAttributes } from 'astro/types';
 
-type Props = Omit<HTMLAttributes<'time'>, 'class'> & {
+interface Props extends Omit<HTMLAttributes<'time'>, 'class'> {
   date: string | Date;
   class?: ClassValue;
   parse?: string;
@@ -14,7 +14,7 @@ type Props = Omit<HTMLAttributes<'time'>, 'class'> & {
   year?: 'numeric' | '2-digit';
   month?: 'numeric' | '2-digit' | 'long' | 'short' | 'narrow';
   day?: 'numeric' | '2-digit';
-};
+}
 
 const {
   date: __date,

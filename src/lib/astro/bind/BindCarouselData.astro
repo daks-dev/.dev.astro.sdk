@@ -4,12 +4,12 @@ import CarouselData from '../../svelte/carousel/CarouselData.svelte';
 import type { CarouselDataAttributes } from '../../svelte/carousel/index.d.ts';
 import type { BindImageData } from './index.d.ts';
 
-type Props = Omit<CarouselDataAttributes, 'data'> & {
+interface Props extends Omit<CarouselDataAttributes, 'data'> {
   data: BindImageData[];
   transform: ImageTransform;
   filter?: string[];
   client?: 'load' | 'idle' | 'visible'; // | (string & NonNullable<unknown>)
-};
+}
 
 const { data: __data, transform, filter, client = 'visible', ...props } = Astro.props;
 

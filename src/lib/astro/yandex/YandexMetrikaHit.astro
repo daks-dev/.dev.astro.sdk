@@ -1,9 +1,11 @@
 ---
-type Props = {
+interface Props {
   counter: number | string;
   title: string;
-};
+}
+
 const { counter, title } = Astro.props;
+
 const href = Astro.url.href;
 ---
 

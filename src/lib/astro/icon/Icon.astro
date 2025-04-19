@@ -1,7 +1,9 @@
 ---
 import { twMerge } from '../../tailwind/tailwind-merge.js';
 import bundle from './index.js';
-import type { IconAttributes as Props } from './index.d.ts';
+import type { IconAttributes } from './index.d.ts';
+
+interface Props extends IconAttributes {}
 
 const {
   icon,
@@ -13,7 +15,7 @@ const {
   gradient,
   'aria-label': ariaLabel,
   ...props
-}: Props = Astro.props;
+} = Astro.props;
 
 const label = ((await Astro.slots.render('default')) || ariaLabel)?.trim();
 
@@ -34,7 +36,7 @@ const id = `_${Math.floor((1 + Math.random()) * 0x1000)
 }
 
 <svg
-  class:list={twMerge('linecap-round linejoin-round align-middle', className)}
+  class:list={twMerge('align-middle linecap-round linejoin-round', className)}
   xmlns='http://www.w3.org/2000/svg'
   {width}
   {height}

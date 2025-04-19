@@ -1,7 +1,9 @@
 ---
 import { twMerge } from '../../tailwind/tailwind-merge.js';
 import Img from '../img/Img.astro';
-import type { FigureAttriibutes as Props } from './index.d.ts';
+import type { FigureAttriibutes } from './index.d.ts';
+
+interface Props extends FigureAttriibutes {}
 
 const {
   src,

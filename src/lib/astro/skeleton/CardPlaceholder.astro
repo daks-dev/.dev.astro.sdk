@@ -1,11 +1,12 @@
 ---
 import { twMerge } from '../../tailwind/tailwind-merge';
 
-type Props = {
+interface Props {
   class?: ClassValue;
   animate?: string;
   size?: number | string;
-};
+}
+
 const {
   class: className,
   animate = 'animate-pulse hover:animation-paused',
@@ -21,7 +22,7 @@ const {
   <div
     class='relative mb-5 flex h-48 items-center justify-center overflow-hidden rounded before:absolute before:inset-0 before:bg-current before:opacity-25'>
     <svg
-      class='linecap-round linejoin-round vector-non-scaling-stroke'
+      class='vector-non-scaling-stroke linecap-round linejoin-round'
       xmlns='http://www.w3.org/2000/svg'
       width={size}
       height={size}
@@ -38,7 +39,7 @@ const {
   <div class='h-2 rounded-full bg-current'></div>
   <div class='mt-1.5 flex items-center space-x-3'>
     <svg
-      class='linecap-round linejoin-round vector-non-scaling-stroke h-14 w-14'
+      class='vector-non-scaling-stroke h-14 w-14 linecap-round linejoin-round'
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 20 20'
       fill='currentColor'>

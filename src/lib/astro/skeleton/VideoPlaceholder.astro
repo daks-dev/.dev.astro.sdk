@@ -1,11 +1,12 @@
 ---
 import { twMerge } from '../../tailwind/tailwind-merge';
 
-type Props = {
+interface Props {
   class?: ClassValue;
   animate?: string;
   size?: number | string;
-};
+}
+
 const {
   class: className,
   animate = 'animate-pulse hover:animation-paused',
@@ -23,7 +24,7 @@ const {
   aria-hidden='true'
   role='status'>
   <svg
-    class='linecap-round linejoin-round vector-non-scaling-stroke'
+    class='vector-non-scaling-stroke linecap-round linejoin-round'
     xmlns='http://www.w3.org/2000/svg'
     width={size}
     height={size}

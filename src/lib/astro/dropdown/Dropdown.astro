@@ -6,13 +6,13 @@ import { uuid as u } from '../../utils/index.js';
 import type { HTMLAttributes } from 'astro/types';
 import type { NavItem } from '../../index.d.ts';
 
-type Toggle = Omit<NavItem, 'id' | 'aria-expanded' | 'aria-controls'>;
+interface Toggle extends Omit<NavItem, 'id' | 'aria-expanded' | 'aria-controls'> {}
 
-type Props = Omit<HTMLAttributes<'div'>, 'class'> & {
+interface Props extends Omit<HTMLAttributes<'div'>, 'class'> {
   toggle: Toggle;
   class?: ClassValue;
   custom?: Record<string, ClassValue>;
-};
+}
 
 const { toggle, class: className, custom = {}, ...props } = Astro.props;
 
