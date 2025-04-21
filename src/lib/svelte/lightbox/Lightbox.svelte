@@ -60,9 +60,15 @@
   $effect(() => {
     loader?.();
     if (!options.bodyScroll || scrollable) {
-      toggleScroll = () => {
-        if (visible) document.body.classList.add('overflow-y-hidden');
-        else document.body.classList.remove('overflow-y-hidden');
+      toggleScroll = function () {
+        if (window.scrollbars.visible)
+          if (visible) {
+            document.documentElement.style.paddingRight = `${window.innerWidth - document.documentElement.clientWidth}px`;
+            document.body.style.overflowY = 'hidden';
+          } else {
+            document.body.style.overflowY = '';
+            document.documentElement.style.paddingRight = '';
+          }
       };
     }
   });

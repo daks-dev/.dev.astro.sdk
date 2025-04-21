@@ -25,7 +25,8 @@ export default plugin(() => {}, {
         '1.5xl': f(1.375),
         '2.5xl': f(1.6875),
         '3.5xl': f(2),
-        '4.5xl': f(2.5)
+        '4.5xl': f(2.5),
+        '5.5xl': f(3.5)
       },
       listStyleType: {
         circle: 'circle',
