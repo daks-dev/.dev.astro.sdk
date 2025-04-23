@@ -38,12 +38,12 @@ const uuid = u();
         {...propsToggle}>
         <span
           slot='after'
-          class:list={[
+          class={twMerge(
             'iconify ph--caret-left-bold',
-            'block size-3',
+            'block',
             'group-aria-expanded:-rotate-90',
-            'disabled'
-          ]}
+            custom.caret
+          )}
         />
       </Link>
     ) : (
@@ -56,12 +56,12 @@ const uuid = u();
         {...propsToggle}>
         <span
           slot='after'
-          class:list={[
+          class={twMerge(
             'iconify ph--caret-left-bold',
-            'block size-3',
+            'block',
             'group-aria-expanded:-rotate-90',
-            'disabled'
-          ]}
+            custom.caret
+          )}
         />
       </Button>
     )
