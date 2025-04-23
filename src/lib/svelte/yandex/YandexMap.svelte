@@ -49,7 +49,7 @@
   }).toString();
 
   function upload(): boolean {
-    return Boolean(typeof ymaps !== 'undefined' && ymaps?.Map && ymaps?.Placemark);
+    return !!(typeof ymaps !== 'undefined' && ymaps?.Map && ymaps?.Placemark);
   }
 
   let map: YandexMapInstance = {};

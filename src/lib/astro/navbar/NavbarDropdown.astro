@@ -12,10 +12,9 @@ interface Props extends Omit<HTMLAttributes<'div'>, 'class'> {
   toggle: Toggle;
   class?: ClassValue;
   custom?: Record<string, ClassValue>;
-  open?: boolean;
 }
 
-const { toggle, class: className, custom = {}, open = false, ...props } = Astro.props;
+const { toggle, class: className, custom = {}, ...props } = Astro.props;
 
 const { href, class: classNameToggle, pointer = true, type, ...propsToggle } = toggle;
 
@@ -23,7 +22,7 @@ const uuid = u();
 ---
 
 <div
-  is='app-dropdown'
+  is='app-navbar-dropdown'
   class={twMerge('relative', 'ready:transition-transform ready:duration-200', custom.frame)}
   {...props}>
   {
@@ -34,7 +33,7 @@ const uuid = u();
         {href}
         {type}
         {pointer}
-        aria-expanded={open}
+        aria-expanded='false'
         aria-controls={`app-dropdown-appear-${uuid}`}
         {...propsToggle}>
         <span
@@ -52,7 +51,7 @@ const uuid = u();
         id={`app-dropdown-toggle-${uuid}`}
         class={twMerge('group', 'flex gap-x-1', classNameToggle, className)}
         type='button'
-        aria-expanded={open}
+        aria-expanded='false'
         aria-controls={`app-dropdown-appear-${uuid}`}
         {...propsToggle}>
         <span
@@ -71,21 +70,47 @@ const uuid = u();
   <div
     id={`app-dropdown-appear-${uuid}`}
     class={twMerge(
-      'absolute top-full',
+      'static bp:absolute bp:top-full',
       'overflow-hide w-max min-w-full',
       'flex flex-col',
       'inert:opacity-0',
-      'origin-top',
+      'origin-top-left bp:origin-top',
       'duration-200 ease-in-out motion-safe:ready:transition-all',
       custom.drop
     )}
-    inert={!open}
+    inert
     aria-owns={`app-dropdown-toggle-${uuid}`}>
     <slot />
   </div>
 </div>
 
 <script>
-  import { AppDropdown } from './AppDropdown.js';
-  customElements.define('app-dropdown', AppDropdown, { extends: 'div' });
+  import { AppDropdown } from '../dropdown/AppDropdown.js';
+
+  class AppNavbarDropdown extends AppDropdown {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      super.connectedCallback();
+      document.addEventListener('click', this.handleOutside);
+    }
+
+    disconnectedCallback() {
+      super.disconnectedCallback();
+      document.removeEventListener('click', this.handleOutside);
+    }
+
+    handleOutside = (ev: Event) => {
+      if (
+        ev?.target &&
+        // ev.defaultPrevented &&
+        !this.contains(ev.target as Node)
+      )
+        this.hide = true;
+    };
+  }
+
+  customElements.define('app-navbar-dropdown', AppNavbarDropdown, { extends: 'div' });
 </script>

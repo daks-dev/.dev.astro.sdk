@@ -19,9 +19,9 @@
 
 <ListMode
   bind:mode
-  app={Boolean(app)}
-  list={Boolean(list)}
-  map={Boolean(map)}
+  app={!!app}
+  list={!!list}
+  map={!!map}
   {...rest} />
 
 {#if mode === 'app'}

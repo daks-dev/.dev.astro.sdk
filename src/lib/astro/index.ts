@@ -6,6 +6,8 @@ export { default as Figure } from './figure/Figure.astro';
 export { default as Video } from './video/Video.astro';
 
 export { default as Dropdown } from './dropdown/Dropdown.astro';
+export { default as NavbarDropdown } from './navbar/NavbarDropdown.astro';
+
 export { default as Head } from './head/Head.astro';
 export { default as Sign } from './sign/Sign.astro';
 
