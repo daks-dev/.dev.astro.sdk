@@ -71,13 +71,11 @@ const uuid = u();
     id={`app-dropdown-appear-${uuid}`}
     class={twMerge(
       'static bp:absolute bp:top-full',
-      'w-max min-w-full overflow-hidden',
+      'overflow-hide w-max min-w-full',
       'flex flex-col',
-      'inert:disabled inert:opacity-0',
-      'inert:my-0 inert:max-h-0 inert:py-0 inert:text-[0px] inert:leading-0',
-      'max-bp:inert:max-w-0',
+      'inert:opacity-0',
       'origin-top-left bp:origin-top',
-      'duration-200 motion-safe:ready:transition-all',
+      'duration-200 ease-in-out motion-safe:ready:transition-all',
       custom.drop
     )}
     inert
@@ -93,10 +91,15 @@ const uuid = u();
 
   class AppDropdown extends HTMLDivElement {
     media = window.matchMedia(`(min-width: ${breakpoint})`);
+    timeout?: ReturnType<typeof setTimeout>;
 
     constructor() {
       super();
+      this.squeeze();
     }
+
+    toggle = this.children[0] as HTMLAnchorElement;
+    dropper = this.children[1] as HTMLElement;
 
     connectedCallback() {
       window.addEventListener('resize', this.bind);
@@ -107,32 +110,39 @@ const uuid = u();
     }
 
     disconnectedCallback() {
-      window.removeEventListener('resize', this.bind);
+      window.removeEventListener('resize', () => this.bind());
       document.removeEventListener('click', this.handleOutside);
     }
 
-    toggle = this.children[0] as HTMLAnchorElement;
+    squeeze(x = true) {
+      this.dropper.style.height = x ? '0px' : '';
+      this.dropper.style.maxHeight = x ? '0px' : '';
+      this.dropper.style.paddingBlock = x ? '0px' : '';
+      this.dropper.style.lineHeight = x ? '0px' : '';
+      this.dropper.style.borderBlock = x ? 'none' : '';
+    }
 
-    dropper = this.children[1] as HTMLDivElement;
-
-    get hidden() {
+    get hide() {
       return this.dropper.hasAttribute('inert');
     }
 
-    set hidden(val) {
-      if (this.hidden !== val) {
-        if (val) {
-          this.toggle.setAttribute('aria-expanded', 'false');
+    set hide(x) {
+      if (this.hide !== x) {
+        clearTimeout(this.timeout);
+        if (x) {
           this.dropper.setAttribute('inert', '');
+          this.timeout = setTimeout(() => this.squeeze(), 200);
+          this.toggle.setAttribute('aria-expanded', 'false');
         } else {
-          this.toggle.setAttribute('aria-expanded', 'true');
           this.dropper.removeAttribute('inert');
+          this.squeeze(false);
+          this.toggle.setAttribute('aria-expanded', 'true');
         }
       }
     }
 
     bind = () => {
-      this.hidden = true;
+      this.hide = true;
       if (this.media.matches)
         if (this.offsetLeft + this.clientWidth / 2 < window.innerWidth / 2) {
           this.dropper.style.left = '0';
@@ -146,7 +156,7 @@ const uuid = u();
     handleToggle = (ev: Event) => {
       ev.preventDefault();
       // ev.stopPropagation();
-      this.hidden = !this.hidden;
+      this.hide = !this.hide;
     };
 
     handleNavigate = (ev: Event) => {
@@ -162,7 +172,7 @@ const uuid = u();
         // ev.defaultPrevented &&
         !this.contains(ev.target as Node)
       )
-        this.hidden = true;
+        this.hide = true;
     };
   }
 

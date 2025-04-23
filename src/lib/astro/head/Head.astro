@@ -60,17 +60,7 @@ const {
   })(document.documentElement, localStorage, 'app::theme', 'theme-dark');
 </script>
 
-{
-  rss && (
-    <link
-      rel='alternate'
-      type='application/rss+xml'
-      title='RSS'
-      href={new URL(rss, Astro.site)}
-    />
-  )
-}
-
+<slot name='preload' />
 {
   /*
 <link
@@ -87,6 +77,7 @@ const {
   as='font'
   type='font/woff2'
   crossorigin
+  transition:persist
 />
   */
 }
@@ -122,6 +113,17 @@ const {
   media='(min-width: 800px)'
 />
   */
+}
+
+{
+  rss && (
+    <link
+      rel='alternate'
+      type='application/rss+xml'
+      title='RSS'
+      href={new URL(rss, Astro.site)}
+    />
+  )
 }
 
 <link
