@@ -12,6 +12,7 @@ export { default as Sign } from './sign/Sign.astro';
 export { default as Dropdown } from './dropdown/Dropdown.astro';
 export { default as NavbarDropdown } from './navbar/NavbarDropdown.astro';
 
+export { default as ThemeToggle } from './theme-toggle/ThemeToggle.astro';
 export { default as ThemeToggleShift } from './theme-toggle/ThemeToggleShift.astro';
 
 export { default as BagePlaceholder } from './skeleton/BagePlaceholder.astro';

@@ -1,7 +1,7 @@
 import { navigate } from 'astro:transitions/client';
 import { beep } from '../../utils/audio.js';
 
-export class AppDropdown extends HTMLDivElement {
+export default class AppDropdown extends HTMLDivElement {
   duration: number;
   timeout?: ReturnType<typeof setTimeout>;
 

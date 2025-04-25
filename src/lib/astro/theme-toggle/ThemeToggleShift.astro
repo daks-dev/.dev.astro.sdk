@@ -39,7 +39,7 @@ const {
       vertical ? 'inset-x-0 dark:translate-y-full' : 'inset-y-0 dark:translate-x-full',
       'aspect-square',
       'rounded-full bg-slate-400 dark:bg-slate-600',
-      'duration-300 motion-safe:transition-transform',
+      'duration-300 motion-safe:ready:transition-transform',
       'bg-only',
       custom.shift
     )}
@@ -56,5 +56,7 @@ const {
 <script>
   import AppThemeToggle from './AppThemeToggle.js';
 
-  customElements.define('app-theme-toggle-shift', AppThemeToggle, { extends: 'button' });
+  class AppThemeToggleShift extends AppThemeToggle {}
+
+  customElements.define('app-theme-toggle-shift', AppThemeToggleShift, { extends: 'button' });
 </script>
