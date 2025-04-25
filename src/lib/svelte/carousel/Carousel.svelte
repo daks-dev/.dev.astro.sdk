@@ -193,7 +193,7 @@
       use:wheel={handle('wheel') ? actionWheel : undefined}
       class={twMerge(
         'h-fit min-h-fit w-full min-w-full overflow-hidden',
-        'select-none',
+        'outline-none select-none',
         rest.href ? 'cursor-pointer' : auto || wait ? 'cursor-wait' : 'cursor-ew-resize'
       )}>
       <div

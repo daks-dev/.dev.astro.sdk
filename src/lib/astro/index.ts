@@ -5,13 +5,14 @@ export { default as Button } from './button/Button.astro';
 export { default as Figure } from './figure/Figure.astro';
 export { default as Video } from './video/Video.astro';
 
+export { default as Head } from './head/Head.astro';
+export { default as FormattedDate } from './formatted-date/FormattedDate.astro';
+export { default as Sign } from './sign/Sign.astro';
+
 export { default as Dropdown } from './dropdown/Dropdown.astro';
 export { default as NavbarDropdown } from './navbar/NavbarDropdown.astro';
 
-export { default as Head } from './head/Head.astro';
-export { default as Sign } from './sign/Sign.astro';
-
-export { default as FormattedDate } from './formatted-date/FormattedDate.astro';
+export { default as ThemeToggleShift } from './theme-toggle/ThemeToggleShift.astro';
 
 export { default as BagePlaceholder } from './skeleton/BagePlaceholder.astro';
 export { default as CardPlaceholder } from './skeleton/CardPlaceholder.astro';

@@ -37,15 +37,12 @@ const uuid = u();
         aria-expanded={open}
         aria-controls={`app-dropdown-appear-${uuid}`}
         {...propsToggle}>
-        <span
-          slot='after'
-          class={twMerge(
-            'iconify ph--caret-left-bold',
-            'block',
-            'group-aria-expanded:-rotate-90',
-            custom.caret
-          )}
-        />
+        {!!custom.caret && (
+          <span
+            slot='after'
+            class={twMerge('block', custom.caret)}
+          />
+        )}
       </Link>
     ) : (
       <Button
@@ -55,15 +52,12 @@ const uuid = u();
         aria-expanded={open}
         aria-controls={`app-dropdown-appear-${uuid}`}
         {...propsToggle}>
-        <span
-          slot='after'
-          class={twMerge(
-            'iconify ph--caret-left-bold',
-            'block',
-            'group-aria-expanded:-rotate-90',
-            custom.caret
-          )}
-        />
+        {!!custom.caret && (
+          <span
+            slot='after'
+            class={twMerge('block', custom.caret)}
+          />
+        )}
       </Button>
     )
   }

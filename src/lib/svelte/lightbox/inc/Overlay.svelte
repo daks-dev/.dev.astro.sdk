@@ -87,7 +87,7 @@
     'not-prose text-base leading-none',
     'bg-black/90',
     'vector-non-scaling-stroke linecap-round linejoin-round',
-    'clear-pseudo select-none',
+    'clear-pseudo outline-none select-none',
     options.clickableClose && 'hover:cursor-zoom-out',
     custom.overlay
   )}

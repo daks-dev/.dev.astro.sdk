@@ -43,6 +43,11 @@ const config: any = {
           rounded: ['5xl', '6xl']
         }
       ],
+      'bg-only': [
+        {
+          bg: ['only']
+        }
+      ],
       'bg-image': [
         {
           bg: ['-loading', '-waiting']
