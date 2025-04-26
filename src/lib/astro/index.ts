@@ -7,6 +7,7 @@ export { default as Video } from './video/Video.astro';
 
 export { default as Head } from './head/Head.astro';
 export { default as FormattedDate } from './formatted-date/FormattedDate.astro';
+export { default as LoadingIndicator } from './loading-indicator/LoadingIndicator.astro';
 export { default as Sign } from './sign/Sign.astro';
 
 export { default as Dropdown } from './dropdown/Dropdown.astro';

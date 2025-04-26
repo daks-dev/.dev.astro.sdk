@@ -13,6 +13,8 @@ export const isTouch = () =>
   navigator?.maxTouchPoints > 0 ||
   (document && 'ontouchstart' in document.documentElement);
 
+export * as fs from './fs.js';
+
 export { default as Animate } from './Animate.js';
 export { default as Swipe, swipe } from './Swipe.js';
 export { default as Wheel, wheel } from './Wheel.js';

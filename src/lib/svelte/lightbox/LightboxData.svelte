@@ -89,7 +89,7 @@
                 grayscale && 'grayscale hover:grayscale-0',
                 invert && 'invert hover:invert-0',
                 (shadow || scale || grayscale || invert) &&
-                  'motion-safe:ready:transition duration-300 ease-in-out',
+                  'duration-300 ease-in-out motion-safe:ready:transition',
                 custom.inner?.img
               ],
               caption: [
@@ -114,7 +114,7 @@
       title={title ?? __title}
       description={description ?? __description}>
       <Img
-        class="bg--loading bg-[size:20%] bg-center bg-no-repeat"
+        class="bg-[size:30%] bg--loading"
         {src}
         {...attributes}
         decoding="async"

@@ -39,12 +39,7 @@
 @utility content-empty {
   content: '';
 }
-/*
-@utility bg-* {
-  background-size: --value(percentage);
-  background-color: --value(--color- *);
-}
-*/
+
 @utility bg-only {
   display: flex;
   overflow: hidden;
@@ -55,11 +50,14 @@
     display: none;
   }
 }
+
 @utility bg--loading {
-  background-image: url(/assets/icons/spinners/90-ring-bg.svg);
+  background-position: center;
+  background-repeat: no-repeat;
 }
 @utility bg--waiting {
-  background-image: url(/assets/icons/spinners/clock.svg);
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 @utility clear-pseudo {
