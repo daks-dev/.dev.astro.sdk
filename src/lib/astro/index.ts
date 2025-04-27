@@ -16,6 +16,8 @@ export { default as NavbarDropdown } from './navbar/NavbarDropdown.astro';
 export { default as ThemeToggle } from './theme-toggle/ThemeToggle.astro';
 export { default as ThemeToggleShift } from './theme-toggle/ThemeToggleShift.astro';
 
+export { default as ToTop } from './to-top/ToTop.astro';
+
 export { default as BagePlaceholder } from './skeleton/BagePlaceholder.astro';
 export { default as CardPlaceholder } from './skeleton/CardPlaceholder.astro';
 export { default as ImagePlaceholder } from './skeleton/ImagePlaceholder.astro';
