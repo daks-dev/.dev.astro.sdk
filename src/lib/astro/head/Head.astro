@@ -220,10 +220,21 @@ const {
 
   const node = document.getElementById('app-navbar');
   const scrolled = () => (window.scrollY > (node ? node.clientHeight : 0) ? 'add' : 'remove');
+  let scroll = 0;
   window.addEventListener('load', () => {
+    scroll = window.scrollY;
     document.body.classList[scrolled()]('scrolled');
   });
   window.addEventListener('scroll', () => {
     document.body.classList[scrolled()]('scrolled');
+    if (scroll > window.scrollY) {
+      document.body.classList.remove('scrolled-down');
+      document.body.classList.add('scrolled-up');
+    } else {
+      document.body.classList.remove('scrolled-up');
+      document.body.classList.add('scrolled-down');
+    }
+    scroll = window.scrollY;
+    if (!scroll) document.body.classList.remove('scrolled-up', 'scrolled-down');
   });
 </script>
