@@ -8,17 +8,20 @@ export default plugin(function ({ matchUtilities, theme }) {
           width: '100%',
           'margin-inline': 'auto'
         };
-        const pad = Number(modifier ?? theme('framePadding', 2));
-        if (pad && !isNaN(pad)) {
-          css['padding-inline'] = `calc(1rem * ${pad})`;
+        let pad = Number(theme('framePadding', 2));
+        pad = isNaN(pad) ? 0 : pad;
+        let indent = Number(modifier);
+        indent = isNaN(indent) ? 0 : indent;
+        if (pad || indent) {
+          css['padding-inline'] = `calc(1rem * ${pad + indent})`;
         }
         if (value) {
           const max = Number(value);
           if (max && !isNaN(max)) {
             css['max-width'] = `calc(1rem * ${max})`;
-            if (pad && !isNaN(pad)) {
+            if (pad || indent) {
               css[`@media (min-width: calc(1rem * ${max + 2 * pad}))`] = {
-                'padding-inline': '0px'
+                'padding-inline': `calc(1rem * ${indent})`
               };
             }
           }
