@@ -29,7 +29,7 @@
     "@tailwindcss/vite": "^4.1.4",
     "@types/node": "^22.15.3",
     "@vitest/ui": "^3.1.2",
-    "astro": "^5.7.6",
+    "astro": "^5.7.8",
     "dayjs": "^1.11.13",
     "esm-env": "^1.2.2",
     "mini-svg-data-uri": "^1.4.4",
@@ -48,7 +48,7 @@
   },
   "peerDependencies": {
     "@sveltejs/kit": "^2.20.7",
-    "astro": "^5.7.6",
+    "astro": "^5.7.8",
     "svelte": "^5.28.2",
     "tailwindcss": "^4.1.4",
     "vite": "^6.3.3"

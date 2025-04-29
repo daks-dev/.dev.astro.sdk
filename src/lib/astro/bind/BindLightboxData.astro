@@ -23,7 +23,7 @@ const data: {
 }[] = [];
 
 const load = async (x: BindImageData[]) => {
-  for (const { src, alt, caption: __caption = {} } of x) {
+  for (const { src, alt, caption: __caption } of x) {
     const t = await getImage({
       src,
       ...transform.thumb
@@ -32,7 +32,7 @@ const load = async (x: BindImageData[]) => {
       src,
       ...transform.modal
     });
-    const caption = Object.entries(__caption).reduce(
+    const caption = Object.entries(__caption ?? {}).reduce(
       (acc, [key, val]) => (
         (filter === undefined || filter.includes(key)) && (acc[key] = val), acc
       ),
