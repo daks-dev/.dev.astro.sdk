@@ -18,27 +18,27 @@
 <div class={twMerge('scoped', 'relative z-30', fullscreen && 'fullscreen', custom.footer)}>
   <div
     class={twMerge(
-      'min-h-24 px-4 pt-2 sm:min-h-12',
+      'min-h-12 px-4 py-1.5',
       'grid grid-cols-2 items-center',
-      'text-sm leading-snug text-white/50 hover:text-white',
+      'text-sm/none text-white/50 hover:text-white',
       'cursor-default',
       custom.inner?.cuption
     )}>
     {#if title}
-      <div class={twMerge('font-semibold', !list && 'col-span-2', custom.inner?.title)}>
+      <span class={twMerge('font-semibold', !list && 'col-span-2', custom.inner?.title)}>
         {@html title}
-      </div>
+      </span>
     {/if}
     {#if list}
-      <div
-        class={twMerge('whitespace-nowrap font-mono', title && 'text-right', custom.inner?.status)}>
+      <span
+        class={twMerge('font-mono whitespace-nowrap', title && 'text-right', custom.inner?.status)}>
         {status.activeItem + 1} <sup>[{status.countItems}]</sup>
-      </div>
+      </span>
     {/if}
     {#if description}
-      <small class={twMerge('col-span-2', custom.inner?.description)}>
+      <span class={twMerge('text-xs/none', 'col-span-2', custom.inner?.description)}>
         {@html description}
-      </small>
+      </span>
     {/if}
   </div>
 </div>
