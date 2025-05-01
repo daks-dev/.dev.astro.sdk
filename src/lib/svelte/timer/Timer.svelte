@@ -21,7 +21,7 @@
     const m = Math.floor((x % 3600) / 60);
     const s = Math.floor(x % 60);
     return (
-      (d ? `${d.toString()} - ` : '') +
+      (d ? `${d.toString()}&nbsp;` : '') +
       (h || d ? `${h.toString().padStart(2, '0')}:` : '') +
       `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`
     );
@@ -46,5 +46,5 @@
   class={twMerge(className)}
   {datetime}
   {...rest}>
-  {format($timer)}
+  {@html format($timer)}
 </time>
