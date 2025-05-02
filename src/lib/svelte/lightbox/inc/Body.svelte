@@ -31,31 +31,27 @@
 </div>
 
 <style scoped>
-  :where(.scoped) {
-    :global(> *) {
-      height: inherit;
-      max-height: inherit;
-    }
-    :global(> img) {
-      pointer-events: none;
-      margin-inline: auto;
-      object-fit: contain;
-    }
-    &.fullscreen {
-      height: inherit;
-      max-height: inherit;
-      width: inherit;
-      align-items: center;
-      justify-content: center;
-      :global(> img) {
-        flex-grow: 1;
-      }
-    }
-    &.scrollable {
-      :global(> :not(img)) {
-        height: 100%;
-        max-height: 100%;
-      }
-    }
+  :global(:where(.scoped > *)) {
+    height: inherit;
+    max-height: inherit;
+  }
+  :global(:where(.scoped > img)) {
+    pointer-events: none;
+    margin-inline: auto;
+    object-fit: contain;
+  }
+  :where(.scoped.fullscreen) {
+    height: inherit;
+    max-height: inherit;
+    width: inherit;
+    align-items: center;
+    justify-content: center;
+  }
+  :global(:where(.scoped.fullscreen > img)) {
+    flex-grow: 1;
+  }
+  :global(:where(.scoped.scrollable > :not(img))) {
+    height: 100%;
+    max-height: 100%;
   }
 </style>

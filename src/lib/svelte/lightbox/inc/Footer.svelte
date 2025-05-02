@@ -44,12 +44,10 @@
 </div>
 
 <style scoped>
-  :where(.scoped) {
-    &.fullscreen {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-    }
+  :where(.scoped.fullscreen) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 </style>
