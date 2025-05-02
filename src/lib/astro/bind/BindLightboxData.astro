@@ -5,15 +5,15 @@ import type { LightboxDataAttributes } from '../../svelte/lightbox/index.d.ts';
 import type { BindImageData } from './index.d.ts';
 
 interface Props extends Omit<LightboxDataAttributes, 'data'> {
+  client: 'load' | 'idle' | 'visible' | 'only';
   data: BindImageData[];
   transform: {
     [x in 'thumb' | 'modal']: ImageTransform;
   };
   filter?: string[];
-  client?: 'load' | 'idle' | 'visible'; // | (string & NonNullable<unknown>)
 }
 
-const { data: __data, transform, filter, client = 'visible', ...props } = Astro.props;
+const { client, data: __data, transform, filter, ...props } = Astro.props;
 
 const data: {
   thumb: ImageResult;
@@ -56,23 +56,29 @@ await load(__data);
 ---
 
 {
-  client === 'visible' ? (
+  client === 'only' ? (
     <LightboxData
+      client:only='svelte'
       {data}
       {...props}
+    />
+  ) : client === 'visible' ? (
+    <LightboxData
       client:visible
+      {data}
+      {...props}
     />
   ) : client === 'idle' ? (
     <LightboxData
+      client:idle
       {data}
       {...props}
-      client:idle
     />
   ) : (
     <LightboxData
+      client:load
       {data}
       {...props}
-      client:load
     />
   )
 }

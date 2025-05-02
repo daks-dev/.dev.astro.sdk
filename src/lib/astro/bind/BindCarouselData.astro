@@ -5,13 +5,13 @@ import type { CarouselDataAttributes } from '../../svelte/carousel/index.d.ts';
 import type { BindImageData } from './index.d.ts';
 
 interface Props extends Omit<CarouselDataAttributes, 'data'> {
+  client: 'load' | 'idle' | 'visible' | 'only';
   data: BindImageData[];
   transform: ImageTransform;
   filter?: string[];
-  client?: 'load' | 'idle' | 'visible'; // | (string & NonNullable<unknown>)
 }
 
-const { data: __data, transform, filter, client = 'visible', ...props } = Astro.props;
+const { client, data: __data, transform, filter, ...props } = Astro.props;
 
 const data: (ImageResult & {
   alt?: string;
@@ -42,23 +42,29 @@ await load(__data);
 ---
 
 {
-  client === 'visible' ? (
+  client === 'only' ? (
     <CarouselData
+      client:only='svelte'
       {data}
       {...props}
+    />
+  ) : client === 'visible' ? (
+    <CarouselData
       client:visible
+      {data}
+      {...props}
     />
   ) : client === 'idle' ? (
     <CarouselData
+      client:idle
       {data}
       {...props}
-      client:idle
     />
   ) : (
     <CarouselData
+      client:load
       {data}
       {...props}
-      client:load
     />
   )
 }
