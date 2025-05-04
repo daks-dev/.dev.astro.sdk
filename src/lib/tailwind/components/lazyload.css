@@ -1,0 +1,13 @@
+@layer components {
+  :where(img) {
+    &:where(:not([src]):not([srcset])) {
+      @apply invisible;
+    }
+    &:where(.lazy-loading) {
+      @apply bg-neutral-300;
+    }
+    /*&:where(.lazy-loaded) {
+       @apply bg-transparent bg-none;
+    }*/
+  }
+}

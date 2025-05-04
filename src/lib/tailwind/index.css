@@ -16,9 +16,10 @@
   --shadow-inset: inset 0 0 0 1px var(--tw-shadow-color);
 }
 
-@import './css/base';
-@import './css/utilities';
-@import './css/variants';
+@import './base';
+@import './utilities';
+@import './variants';
+@import './components';
 
 @plugin './plugins/config';
 
@@ -29,18 +30,3 @@
 
 @plugin './plugins/frame';
 @plugin './plugins/wrapper';
-
-@layer utilities {
-  /* LazyLoad */
-  :where(img) {
-    &:where(:not([src]):not([srcset])) {
-      @apply invisible;
-    }
-    &:where(.lazy-loading) {
-      @apply bg-neutral-300;
-    }
-    /*&:where(.lazy-loaded) {
-       @apply bg-transparent bg-none;
-    }*/
-  }
-}

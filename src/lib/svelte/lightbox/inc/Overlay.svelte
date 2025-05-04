@@ -81,6 +81,7 @@
   use:wheel={next && previous && actionWheel}
   onclick={handleClick}
   onkeydown={null}
+  id="lightbox"
   class={twMerge(
     'fixed top-0 left-0 z-[999] h-screen max-h-screen w-full max-w-full overflow-hidden',
     'flex items-center justify-center',
@@ -96,6 +97,7 @@
   <div
     onclick={breakClick}
     onkeydown={null}
+    id="lightbox-overlay"
     class={twMerge('max-h-inherit flex flex-col', fullscreen && 'h-inherit w-inherit')}
     role="button"
     tabindex="-1">

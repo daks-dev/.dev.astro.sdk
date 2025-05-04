@@ -15,7 +15,9 @@
   const list = status && status.countItems > 1;
 </script>
 
-<div class={twMerge('scoped', 'relative z-30', fullscreen && 'fullscreen', custom.footer)}>
+<div
+  id="lightbox-footer"
+  class={twMerge('relative z-30', fullscreen && 'fullscreen', custom.footer)}>
   <div
     class={twMerge(
       'min-h-12 px-4 py-1.5',
@@ -42,12 +44,3 @@
     {/if}
   </div>
 </div>
-
-<style scoped>
-  :where(.scoped.fullscreen) {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-</style>

@@ -20,8 +20,8 @@
 <div
   in:blur={{ duration: options.duration, delay }}
   out:blur={{ duration: delay }}
+  id="lightbox-body"
   class={twMerge(
-    'scoped',
     'relative z-10 flex overflow-hidden',
     fullscreen && 'fullscreen',
     scrollable && 'scrollable overflow-y-auto',
@@ -29,29 +29,3 @@
   )}>
   {@render children?.()}
 </div>
-
-<style scoped>
-  :global(:where(.scoped > *)) {
-    height: inherit;
-    max-height: inherit;
-  }
-  :global(:where(.scoped > img)) {
-    pointer-events: none;
-    margin-inline: auto;
-    object-fit: contain;
-  }
-  :where(.scoped.fullscreen) {
-    height: inherit;
-    max-height: inherit;
-    width: inherit;
-    align-items: center;
-    justify-content: center;
-  }
-  :global(:where(.scoped.fullscreen > img)) {
-    flex-grow: 1;
-  }
-  :global(:where(.scoped.scrollable > :not(img))) {
-    height: 100%;
-    max-height: 100%;
-  }
-</style>
