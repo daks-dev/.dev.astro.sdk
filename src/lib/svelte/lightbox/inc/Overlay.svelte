@@ -17,6 +17,19 @@
 
   const { children, close, next, previous, custom, options, fullscreen }: Props = $props();
 
+  const transition = {
+    in: options.duration
+      ? {
+          duration: options.duration
+        }
+      : undefined,
+    out: options.duration
+      ? {
+          duration: options.duration / 2
+        }
+      : undefined
+  };
+
   function handleKey(ev: KeyboardEvent): void {
     if (options.enableKeyboard)
       switch (ev.key) {
@@ -75,13 +88,13 @@
 
 <div
   bind:this={node}
-  in:fade={{ duration: options.duration }}
-  out:fade={{ duration: options.duration && options.duration / 2 }}
+  in:fade={transition.in}
+  out:fade={transition.out}
   use:swipe={next && previous && actionSwipe}
   use:wheel={next && previous && actionWheel}
   onclick={handleClick}
   onkeydown={null}
-  id="lightbox"
+  id="lightbox-overlay"
   class={twMerge(
     'fixed top-0 left-0 z-[999] h-screen max-h-screen w-full max-w-full overflow-hidden',
     'flex items-center justify-center',
@@ -97,16 +110,12 @@
   <div
     onclick={breakClick}
     onkeydown={null}
-    id="lightbox-overlay"
-    class={twMerge('max-h-inherit flex flex-col', fullscreen && 'h-inherit w-inherit')}
+    class={['max-h-inherit flex flex-col', fullscreen && 'h-inherit w-inherit']}
     role="button"
     tabindex="-1">
     {@render children?.()}
   </div>
-  <div
-    class="
-      absolute top-4 left-4
-      flex items-center gap-2 text-gray-500">
+  <div class={['absolute top-4 left-4', 'flex items-center gap-2 text-gray-500']}>
     {#if touch()}
       <svg
         width="20px"

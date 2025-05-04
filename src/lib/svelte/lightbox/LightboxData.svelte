@@ -89,7 +89,7 @@
                 grayscale && 'grayscale hover:grayscale-0',
                 invert && 'invert hover:invert-0',
                 (shadow || scale || grayscale || invert) &&
-                  'duration-300 ease-in-out motion-safe:ready:transition',
+                  'duration-200 ease-in-out motion-safe:transition',
                 custom.inner?.img
               ],
               caption: [

@@ -41,12 +41,12 @@
   aria-label={next ? 'next' : 'prev'}
   {disabled}>
   <svg
-    class={twMerge(
+    class={[
       'disabled',
       'w-16 p-2 hover:scale-125',
-      'transition-all duration-200 ease-in',
+      'duration-200 ease-in motion-safe:transition',
       next ? 'mr-2' : 'rotate-180'
-    )}
+    ]}
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor">

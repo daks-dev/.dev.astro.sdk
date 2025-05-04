@@ -26,13 +26,13 @@
   {#if options.buttonFullscreen}
     <button
       onclick={toogleFullscreen}
-      class={twMerge(
+      class={[
         'py-1.5',
-        'transition-all duration-200',
-        'ease-in hover:scale-125 hover:cursor-pointer',
+        'hover:scale-125 hover:cursor-pointer',
         'hover:text-white',
+        'duration-200 ease-in motion-safe:transition-all',
         fullscreen && ['shadow-lg', !options.buttonClose && 'pr-2']
-      )}
+      ]}
       aria-label="full screen">
       <svg
         class="disabled w-9"
@@ -52,12 +52,12 @@
   {#if options.buttonClose}
     <button
       onclick={close}
-      class={twMerge(
+      class={[
         'py-1.5',
-        'transition-all duration-200 ease-in',
         'hover:scale-125 hover:cursor-pointer hover:text-white',
+        'duration-200 ease-in motion-safe:transition-all',
         fullscreen && 'pr-2 shadow-lg'
-      )}
+      ]}
       aria-label="close">
       <svg
         class="disabled w-9"

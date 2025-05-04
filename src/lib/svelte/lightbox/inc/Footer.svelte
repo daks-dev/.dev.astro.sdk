@@ -17,7 +17,7 @@
 
 <div
   id="lightbox-footer"
-  class={twMerge('relative z-30', fullscreen && 'fullscreen', custom.footer)}>
+  class={['relative z-30', fullscreen && 'fullscreen', custom.footer]}>
   <div
     class={twMerge(
       'min-h-12 px-4 py-1.5',
