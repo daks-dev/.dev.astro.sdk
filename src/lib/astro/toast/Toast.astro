@@ -1,0 +1,70 @@
+---
+import { twMerge } from '../../tailwind/tailwind-merge';
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends Omit<HTMLAttributes<'div'>, 'class' | 'inert'> {
+  class?: ClassValue;
+  duration?: number;
+}
+
+const { class: className, duration = 3000, ...props } = Astro.props;
+---
+
+<app-toast data-duration={duration}>
+  <template>
+    <div
+      class={twMerge(
+        'fixed z-50',
+        'mx-4 px-3 py-2',
+        'inert:opacity-0',
+        'duration-300 ease-in-out motion-safe:transition-opacity',
+        className
+      )}
+      inert
+      {...props}>
+    </div>
+  </template>
+</app-toast>
+
+<script>
+  import { toast } from '../../app/stores/index.js';
+
+  class AppToast extends HTMLElement {
+    panel: HTMLDivElement;
+    timeout?: ReturnType<typeof setTimeout>;
+
+    constructor() {
+      super();
+      this.appendChild(this.querySelector('template')!.content.cloneNode(true));
+      this.panel = this.querySelector('div')!;
+    }
+
+    connectedCallback() {
+      toast.listen((x) => (x ? this.open(x) : this.close()));
+    }
+
+    disconnectedCallback() {
+      clearTimeout(this.timeout);
+      toast.off();
+    }
+
+    get duration() {
+      const x = Number(this.dataset.duration);
+      return isNaN(x) ? 5000 : x;
+    }
+
+    open = (x: string) => {
+      clearTimeout(this.timeout);
+      this.panel.innerHTML = x;
+      this.panel.removeAttribute('inert');
+      this.timeout = setTimeout(() => toast.set(undefined), this.duration);
+    };
+
+    close = () => {
+      this.panel.setAttribute('inert', '');
+      this.timeout = setTimeout(() => (this.panel.innerHTML = ''), 301);
+    };
+  }
+
+  customElements.define('app-toast', AppToast);
+</script>

@@ -1,3 +1,6 @@
+export { default as BindCarouselData } from './bind/BindCarouselData.astro';
+export { default as BindLightboxData } from './bind/BindLightboxData.astro';
+
 export { default as Img } from './img/Img.astro';
 export { default as Icon } from './icon/Icon.astro';
 export { default as Link } from './link/Link.astro';
@@ -16,6 +19,8 @@ export { default as NavbarDropdown } from './navbar/NavbarDropdown.astro';
 export { default as ThemeToggle } from './theme-toggle/ThemeToggle.astro';
 export { default as ThemeToggleShift } from './theme-toggle/ThemeToggleShift.astro';
 
+export { default as Toast } from './toast/Toast.astro';
+
 export { default as ToTop } from './to-top/ToTop.astro';
 
 export { default as BagePlaceholder } from './skeleton/BagePlaceholder.astro';
@@ -32,5 +37,4 @@ export { default as YandexMap } from './yandex/YandexMap.astro';
 export { default as YandexMetrika } from './yandex/YandexMetrika.astro';
 export { default as YandexMetrikaHit } from './yandex/YandexMetrikaHit.astro';
 
-export { default as BindCarouselData } from './bind/BindCarouselData.astro';
-export { default as BindLightboxData } from './bind/BindLightboxData.astro';
+export { default as ApiTestButton } from './api/ApiTestButton.astro';

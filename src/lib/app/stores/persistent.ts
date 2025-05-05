@@ -1,4 +1,4 @@
-import { persistentAtom, persistentMap } from '@nanostores/persistent';
+import { persistentMap } from '@nanostores/persistent';
 
 export const meta = persistentMap<Record<string, Meta>>(
   'app::meta::',
@@ -8,5 +8,3 @@ export const meta = persistentMap<Record<string, Meta>>(
     decode: JSON.parse
   }
 );
-
-export const referrer = persistentAtom<string>('--');

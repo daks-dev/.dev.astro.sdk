@@ -1,0 +1,62 @@
+---
+import { twMerge } from '../../tailwind/tailwind-merge';
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends Omit<HTMLAttributes<'button'>, 'class'> {
+  custom: ClassValue;
+  class?: ClassValue;
+  href?: string;
+}
+
+const {
+  custom,
+  class: className,
+  href = '/api',
+  'aria-label': ariaLabel = 'api test',
+  ...props
+} = Astro.props;
+---
+
+<app-api-test-button data-href={href}>
+  <template>
+    <button
+      class={twMerge(className)}
+      type='button'
+      tabindex='-1'
+      aria-label={ariaLabel}
+      {...props}>
+      <span
+        class={twMerge('bg-only', custom)}
+        set:text={ariaLabel}
+      />
+    </button>
+  </template>
+</app-api-test-button>
+
+<script>
+  import { toast } from '../../app/stores/index.js';
+
+  class AppApiTestButton extends HTMLElement {
+    button: HTMLButtonElement;
+
+    constructor() {
+      super();
+      this.appendChild(this.querySelector('template')!.content.cloneNode(true));
+      this.button = this.querySelector('button')!;
+    }
+
+    connectedCallback() {
+      this.button.addEventListener('click', this.handle);
+    }
+
+    // disconnectedCallback() {}
+
+    handle = async (e: Event) => {
+      if (e.cancelable) e.preventDefault();
+      const json = await fetch(this.dataset.href!).then((x) => x.json());
+      toast.set(`API-TEST: ${json.data}`);
+    };
+  }
+
+  customElements.define('app-api-test-button', AppApiTestButton);
+</script>
